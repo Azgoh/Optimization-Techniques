@@ -3,14 +3,14 @@
 clc, clear
 
 % Ορισμός ανώνυμων συναρτήσεων
-f1 = @(x) (x-2).^2 + x.*log(x+3);
-f2 = @(x) exp(-2*x) + (x-2).^2;
-f3 = @(x) exp(x).*((x.^3) - 1) + (x-1).*sin(x);
+f1 = @(x) (x-2)^2 + x*log(x+3);
+f2 = @(x) exp(-2*x) + (x-2)^2;
+f3 = @(x) exp(x)*((x^3) - 1) + (x-1)*sin(x);
 
 a = -1;
 b = 3;
 l_array = linspace(0.001, 0.1, 50);
-e = 0.01;
+e = 0.001;
 
 num_calc_f1 = zeros(size(l_array));
 num_calc_f2 = zeros(size(l_array));
@@ -19,13 +19,13 @@ num_calc_f3 = zeros(size(l_array));
 for i = 1:length(l_array)
     l = l_array(i);
 
-    [num_calls_f1, a_values_f1, b_values_f1] = Fibonacci(f1, a, b, l);
+    [num_calls_f1, a_values_f1, b_values_f1] = Fibonacci(f1, a, b, l, e);
     num_calc_f1(i) = num_calls_f1;
 
-    [num_calls_f2, a_values_f2, b_values_f2] = Fibonacci(f2, a, b, l);
+    [num_calls_f2, a_values_f2, b_values_f2] = Fibonacci(f2, a, b, l, e);
     num_calc_f2(i) = num_calls_f2;
 
-    [num_calls_f3, a_values_f3, b_values_f3] = Fibonacci(f3, a, b, l);
+    [num_calls_f3, a_values_f3, b_values_f3] = Fibonacci(f3, a, b, l, e);
     num_calc_f3(i) = num_calls_f3;
 
     % Ο κώδικας στην if αφορά το β ερώτημα και την σύγκριση των άκρων του
