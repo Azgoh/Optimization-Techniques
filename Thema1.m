@@ -68,7 +68,7 @@ for i = 1:length(l_array)
     num_calc_f3(i) = num_calls_f3;
 
     if i==1
-        figure(2);
+        figure(3);
         k_values = 1:length(a_values_f1);
         plot(k_values, a_values_f1, '-o', k_values, b_values_f1, '-x');
         grid on;
@@ -76,14 +76,14 @@ for i = 1:length(l_array)
         legend('a_k', 'b_k');
         title('Endpoints (a,k) and (b,k) based on number of iterations k for l=0.001 for f1');
 
-        figure(3);
+        figure(4);
         k_values = 1:length(a_values_f2);
         plot(k_values, a_values_f2, '-o', k_values, b_values_f2, '-x');
         grid on;
         legend('a_k', 'b_k');
         title('Endpoints (a,k) and (b,k) based on number of iterations k for l=0.001 for f2');
         
-        figure(4);
+        figure(5);
         k_values = 1:length(a_values_f3);
         plot(k_values, a_values_f3, '-o', k_values, b_values_f3, '-x');
         grid on;
@@ -97,7 +97,7 @@ end
  %επαναλήψεις εφόσον το [a,b] πρέπει να μικρύνει επαρκώς ώστε (b-a)<=l
  %ενώ για μεγαλύτερες τιμές του l δεν χρειάζομαι τόσες επαναλήψεις.
 
- figure(5);
+ figure(2);
  plot(l_array, num_calc_f1);
  hold on;
  plot(l_array, num_calc_f2);
