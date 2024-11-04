@@ -23,18 +23,12 @@ function [calls, a_values, b_values] = DixotomosParagwgos(f, a, b, l)
 
         elseif f_derivative > 0
             b = mid;
-            if k == n
-                break;
-            end
 
         else 
             a = mid;
-            if k == n
-                break;
-            end
         end
+     end
         
-    end
     a_values = [a_values, a];
     b_values = [b_values, b];
 end
