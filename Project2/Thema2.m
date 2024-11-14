@@ -33,7 +33,7 @@ plot(1:length(f_values_B), f_values_B, "blue");
 hold on;
 plot(1:length(f_values_C), f_values_C, "green");
 legend('gamma = 0.1', 'gamma that minimizes $$f(x_k - \gamma_k \nabla f(x_k)$$', 'Armijo', 'interpreter', 'latex');
-title('f(x,y) values with respect to the number of repetitions. Starting point is (-1,1)'); %Έχουμε number of reps + 1 γιατί προσθέτω και την f_value που προκύπτει από το αρχικό ζευγάρι (x_initial,y_initial)
+title('f(x,y) values with respect to the number of repetitions. Starting point is (-1,1)'); 
 xlabel('Repetitions');
 ylabel('f(x,y) values');
 
@@ -53,6 +53,6 @@ hold on;
 plot(1:length(f_values_B), f_values_B, "blue");
 plot(1:length(f_values_C), f_values_C, "green");
 legend('gamma = 0.1', 'gamma that minimizes $$f(x_k - \gamma_k \nabla f(x_k)$$', 'Armijo', 'interpreter', 'latex');
-title('f(x,y) values with respect to the number of repetitions. Starting point is (1,-1)'); %Έχουμε number of reps + 1 γιατί προσθέτω και την f_value που προκύπτει από το αρχικό ζευγάρι (x_initial,y_initial)
+title('f(x,y) values with respect to the number of repetitions. Starting point is (1,-1)'); 
 xlabel('Repetitions');
 ylabel('f(x,y) values');
