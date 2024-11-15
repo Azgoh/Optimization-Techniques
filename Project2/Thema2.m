@@ -11,9 +11,9 @@ epsilon = 0.01;
 
 %Σημείο i --> (0,0) Ο αλγόριθμος δεν αρχίζει καν αφού το grad στο 0 είναι
 %0<ε. Για αυτό δεν υπάρχει κάποιο γράφημα.
-[min_f_A, min_x_A, min_y_A, f_values_A] = MegisthKathodosA(f, 0, 0, gamma, epsilon);
-[min_f_B, min_x_B, min_y_B, f_values_B] = MegisthKathodosB(f, 0, 0, epsilon);
-[min_f_C, min_x_C, min_y_C, f_values_C] = MegisthKathodosC(f, 0, 0, epsilon);
+[min_f_A, min_x_A, min_y_A, f_values_A] = SteepestDescent(f, 0, 0, epsilon, gamma);
+[min_f_B, min_x_B, min_y_B, f_values_B] = SteepestDescent(f, 0, 0, epsilon);
+[min_f_C, min_x_C, min_y_C, f_values_C] = SteepestDescent(f, 0, 0, epsilon, 'armijo', true);
 
 
 %Σημείο ii --> (-1,1). Βρίσκει επιτυχώς το ολικό ελάχιστο -0.81. 
@@ -22,9 +22,9 @@ epsilon = 0.01;
 %ένα βήμα γ που απλώς διασφαλίζει ότι η συνάρτηση μειώνεται συνεχώς(χωρίς
 % αυτό να είναι απαραίτητα το βέλτιστο γ). Τις περισσότερες επαναλήψεις
 % χρειάζεται η μέθοδος σταθερού βήματος γ.
-[min_f_A, min_x_A, min_y_A, f_values_A] = MegisthKathodosA(f, -1, 1, gamma, epsilon);
-[min_f_B, min_x_B, min_y_B, f_values_B] = MegisthKathodosB(f, -1, 1, epsilon);
-[min_f_C, min_x_C, min_y_C, f_values_C] = MegisthKathodosC(f, -1, 1, epsilon);
+[min_f_A, min_x_A, min_y_A, f_values_A] = SteepestDescent(f, -1, 1, epsilon, gamma);
+[min_f_B, min_x_B, min_y_B, f_values_B] = SteepestDescent(f, -1, 1, epsilon);
+[min_f_C, min_x_C, min_y_C, f_values_C] = SteepestDescent(f, -1, 1, epsilon, 'armijo', true);
 figure(1);
 plot(1:length(f_values_A), f_values_A, "red");
 grid on;
@@ -43,9 +43,9 @@ ylabel('f(x,y) values');
 %προσεγγίζει το 0, οπότε πληρείται η συνθήκη τερματισμού του αλγορίθμου.
 %Ελαχιστοποίση και Armijo ταυτόσημες. Τις περισσότερες επαναλήψεις
 %χρειάζεται η μέθοδος σταθερού βήματος γ.
-[min_f_A, min_x_A, min_y_A, f_values_A] = MegisthKathodosA(f, 1, -1, gamma, epsilon);
-[min_f_B, min_x_B, min_y_B, f_values_B] = MegisthKathodosB(f, 1, -1, epsilon);
-[min_f_C, min_x_C, min_y_C, f_values_C] = MegisthKathodosC(f, 1, -1, epsilon);
+[min_f_A, min_x_A, min_y_A, f_values_A] = SteepestDescent(f, 1, -1, epsilon, gamma);
+[min_f_B, min_x_B, min_y_B, f_values_B] = SteepestDescent(f, 1, -1, epsilon);
+[min_f_C, min_x_C, min_y_C, f_values_C] = SteepestDescent(f, 1, -1, epsilon, 'armijo', true);
 figure(2);
 plot(1:length(f_values_A), f_values_A, "red");
 grid on;
