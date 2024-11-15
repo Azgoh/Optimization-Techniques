@@ -61,7 +61,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
             y_val = y_val + gamma * dk(2);
         end 
         grad = grad_f(x_val,y_val);
-        hess = hessian_f(x_val, y_val) + 5*eye(2);
+        hess = hessian_f(x_val, y_val) + 1.2*eye(2);
         f_values = [f_values, f(x_val,y_val)];
     end
     min_f = f(x_val,y_val);
