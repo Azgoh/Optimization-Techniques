@@ -20,7 +20,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
 
     a = 1e-4; %Armijo a
     b = 0.2; %Armijo b
-    s = 1000; %Αρχικό βήμα
+    s = 100; %Αρχικό βήμα
     
     f_sym = f(x,y);
     grad_f_sym = gradient(f_sym);
