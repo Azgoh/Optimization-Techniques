@@ -20,7 +20,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
 
     a = 1e-4; %Armijo a
     b = 0.2; %Armijo b
-    s = 1; %Αρχικό βήμα
+    s = 1000; %Αρχικό βήμα
     
     f_sym = f(x,y);
     grad_f_sym = gradient(f_sym);
@@ -31,7 +31,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
 
     grad = grad_f(x_val,y_val);
     hess = hessian_f(x_val, y_val);
-    hess = hess + 1.2*eye(2); %Αρνητικα ορισμενος hessian οποτε προσθετουμε κI
+    hess = hess + 1.2*eye(2); %Αρνητικα ορισμενος hessian οποτε προσθετουμε damping κI
     f_values = [f(x_val,y_val)];
  
     while norm(grad) > e
@@ -52,7 +52,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
 
         elseif ~useArmijo && isempty(gamma) %Μέθοδος ελαχιστοποίησης αφού γ δεν παρέχεται και useArmijo=false
             line_search_f = @(gamma) f(x_val+gamma*dk(1), y_val+gamma*dk(2));
-            gamma_min = fminbnd(line_search_f, 0,1);
+            gamma_min = XrysosTomeas(line_search_f, 0, 10, 0.001, 0.618);
             x_val = x_val + gamma_min * dk(1);
             y_val = y_val + gamma_min * dk(2);
 

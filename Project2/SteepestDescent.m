@@ -25,7 +25,7 @@ function [min_f, min_x, min_y, f_values] = SteepestDescent(f, x_val, y_val, e, v
 
     a = 1e-4; %Armijo a
     b = 0.2; %Armijo b
-    s = 1; %Αρχικό βήμα
+    s = 100; %Αρχικό βήμα
     
     f_sym = f(x,y);
     grad_f_sym = gradient(f_sym);
@@ -36,9 +36,8 @@ function [min_f, min_x, min_y, f_values] = SteepestDescent(f, x_val, y_val, e, v
     f_values = [f(x_val,y_val)];
 
     while norm(grad) > e
-
+        dk = -grad;
         if useArmijo && isempty(gamma) %Μέθοδος armijo αφού γ δεν παρέχεται και useArmijo=true
-            dk = -grad;
             m_k = 0; %Ξεκινάμε με τον μικρότερο μη αρνητικό ακέραιο
             gamma_arm = s * b^(m_k); %Armijo rule to find gamma
             fxk = f(x_val, y_val);
@@ -48,25 +47,22 @@ function [min_f, min_x, min_y, f_values] = SteepestDescent(f, x_val, y_val, e, v
                 m_k = m_k + 1;
                 gamma_arm = s * b^m_k;
             end
-            x_val = x_val - gamma_arm * grad(1);
-            y_val = y_val - gamma_arm * grad(2);
-            grad = grad_f(x_val,y_val);
-            f_values = [f_values, f(x_val,y_val)];
+            x_val = x_val + gamma_arm * dk(1);
+            y_val = y_val + gamma_arm * dk(2);
+            
 
         elseif ~useArmijo && isempty(gamma) %Μέθοδος ελαχιστοποίησης αφού γ δεν παρέχεται και useArmijo=false
-            line_search_f = @(gamma) f(x_val-gamma*grad(1), y_val-gamma*grad(2));
-            gamma_min = fminbnd(line_search_f, 0,1);
-            x_val = x_val - gamma_min * grad(1);
-            y_val = y_val - gamma_min * grad(2);
-            grad = grad_f(x_val,y_val);
-            f_values = [f_values, f(x_val,y_val)];
+            line_search_f = @(gamma) f(x_val+gamma*dk(1), y_val+gamma*dk(2));
+            gamma_min = XrysosTomeas(line_search_f, 0, 10, 0.001, 0.618);
+            x_val = x_val + gamma_min * dk(1);
+            y_val = y_val + gamma_min * dk(2);
 
         else %Μέθοδος σταθερού γ
-            x_val = x_val - gamma * grad(1);
-            y_val = y_val - gamma * grad(2);
-            grad = grad_f(x_val,y_val);
-            f_values = [f_values, f(x_val,y_val)];
+            x_val = x_val + gamma * dk(1);
+            y_val = y_val + gamma * dk(2);
         end 
+        grad = grad_f(x_val,y_val);
+        f_values = [f_values, f(x_val,y_val)];
     end
     min_f = f(x_val,y_val);
     min_x = x_val;
