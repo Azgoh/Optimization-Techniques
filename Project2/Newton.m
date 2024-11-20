@@ -50,7 +50,7 @@ function [min_f, min_x, min_y, f_values] = Newton(f, x_val, y_val, e, varargin)
 
         elseif ~useArmijo && isempty(gamma) %Μέθοδος ελαχιστοποίησης αφού γ δεν παρέχεται και useArmijo=false
             line_search_f = @(gamma) f(x_val+gamma*dk(1), y_val+gamma*dk(2));
-            gamma_min = XrysosTomeas(line_search_f, 0, 10, 0.001, 0.618)
+            gamma_min = XrysosTomeas(line_search_f, 0, 10, 0.001, 0.618);
             x_val = x_val + gamma_min * dk(1);
             y_val = y_val + gamma_min * dk(2);
 
